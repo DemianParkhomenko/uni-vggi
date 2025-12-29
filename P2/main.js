@@ -20,8 +20,6 @@ const transformPoint = (m, p) => {
   ];
 };
 
-/*======================  MODEL – TRIANGLES WITH INDICES  ======================*/
-
 function Model(name) {
   this.name = name;
 
@@ -71,8 +69,6 @@ function Model(name) {
     gl.drawElements(gl.TRIANGLES, this.indexCount, gl.UNSIGNED_SHORT, 0);
   };
 }
-
-/*======================  SHADER PROGRAM WRAPPER  ======================*/
 
 function ShaderProgram(name, program) {
   this.name = name;
@@ -218,8 +214,6 @@ const CreateSurfaceData = (uSeg = 40, vSeg = 40) => {
   return { positions, normals, indices };
 };
 
-/*======================  DRAW  ======================*/
-
 const computeProjection = () => m4.perspective(Math.PI / 8, 1, 2, 20);
 
 const computeModelView = () => {
@@ -255,15 +249,11 @@ const draw = () => {
   surface.Draw();
 };
 
-/*======================  ANIMATION LOOP  ======================*/
-
 const animate = (time) => {
   currentTime = time * 0.001; // ms → seconds
   draw();
   requestAnimationFrame(animate);
 };
-
-/*======================  INIT GL  ======================*/
 
 const validateGLResources = (prog) => {
   shProgram.iAttribVertex = gl.getAttribLocation(prog, "vertex");
@@ -303,8 +293,6 @@ const initGL = () => {
   gl.cullFace(gl.BACK);
 };
 
-/*======================  SHADER CREATION – UNCHANGED LOGIC  ======================*/
-
 const createProgram = (gl, vShader, fShader) => {
   const vsh = gl.createShader(gl.VERTEX_SHADER);
   gl.shaderSource(vsh, vShader);
@@ -337,8 +325,6 @@ const createProgram = (gl, vShader, fShader) => {
   }
   return prog;
 };
-
-/*======================  INIT  ======================*/
 
 const init = () => {
   let canvas;
